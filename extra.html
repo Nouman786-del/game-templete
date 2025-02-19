@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glassmorphic Boxes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"  />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    .glass-box:nth-child(3){
+border-color: #EDC967;
+
+    }
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('Rectangle 2 (1).png'); /* Apni image ka path yahan likhein */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Container */
+    .container-fluid {
+      display: flex;
+      gap: 10px;
+      background-color: transparent;
+      height: 300px;
+      width: 100%;
+    }
+
+    /* Glass Box Styling */
+    .glass-box {
+      width: 218px;
+      flex: 1;
+      height: 400px;
+      background: rgba(255, 255, 255, 0.016); /* Light Glass Effect */
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* Glass Effect */
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.253);
+      position: relative;
+      overflow: hidden;
+      color: rgb(255, 255, 255);
+    }
+
+    /* Pehla aur Aakhri Glass ki Styling */
+    .glass-box:first-child {
+      border-top-left-radius: 0px;
+      border-bottom-left-radius: 0px;
+      flex: 0.3;
+      border-left-color: black;
+    }
+    .glass-box:last-child {
+      flex: 0.3;
+      border-top-right-radius: 0px;
+      border-bottom-right-radius: 0px;
+      border-right-color: black;
+    }
+
+    /* ✅ Glass Box Background Image (Always Cover the Box) */
+    .glass-box:nth-child(1)::before,
+    .glass-box:nth-child(2)::before,
+    .glass-box:nth-child(4)::before,
+    .glass-box:nth-child(5)::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('jik.png');  /* Apni image ka path */
+      background-size: cover;  /* Cover the entire box */
+      background-position: center;  
+      background-repeat: no-repeat;
+    }
+
+    /* ✅ Keep Image & Text in the Same Position */
+    #g, #t, #co {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%); /* Keep Centered */
+    }
+    #g {
+      top: 150px;
+      width: 80px;
+    }
+    #t {
+      top: 180px;
+      width: 20px;
+    }
+    #co {
+      top: 250px;
+      font-size: 20px;
+      color: white;
+      text-transform: uppercase;
+      text-align: center;
+      width: 100%;
+    }
+
+    /* ✅ Button Styling */
+    .top-right-btn, .top {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: transparent;
+      color: goldenrod;
+      border: 1px solid goldenrod;
+      padding: 4px 4px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: 0.3s;
+      border-radius: 10px;
+      width: 60px;
+    }
+    .top-right-btn:hover, .top:hover {
+      background: rgb(192, 135, 11);
+    }
+
+    /* ✅ Responsive Design for Tablet (Max Width: 768px) */
+    @media (max-width: 768px) {
+   
+       /* Second and Fourth Glass Box Background Image Adjustment */
+  
+      .glass-box:nth-child(3) {
+        max-width: 300px;
+      }
+      .glass-box:first-child,
+      .glass-box:last-child {
+        display: none; /* Hide First and Last Box */
+      }
+      /* 2nd and 4th Box behave like First and Last */
+      .glass-box:nth-child(2) {
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        flex: 0.3;
+        border-left-color: black;
+      }
+      .glass-box:nth-child(4) {
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 0px;
+        flex: 0.3;
+        border-right-color: black;
+      }
+      .glass-box:nth-child(4) .top-right-btn {
+        display: none;
+      }
+      .glass-box:nth-child(4) #co  {
+        margin-left: 60px;
+      }
+      .glass-box:nth-child(4) #t  {
+        margin-left: 60px;
+      }
+      .glass-box:nth-child(4) #g {
+        margin-left: 60px;
+      }
+      .glass-box:nth-child(2) #g, #t, #co  {
+        margin-left: -60px;
+      }
+    }
+
+    /* ✅ Mobile View (Max Width: 480px) */
+    @media (max-width: 480px) {
+      .glass-box:nth-child(1),
+      .glass-box:nth-child(2),
+      .glass-box:nth-child(5) {
+        display: none; /* Hide 1st, 2nd, and 5th Boxes */
+      }
+      /* Keep Third Box Fully Visible */
+      .glass-box:nth-child(3) {
+        min-width: 290px;
+      }
+      /* Keep Fourth Box Slightly Visible */
+      .glass-box:nth-child(4) {
+        max-width: 100px; /* Adjust width to keep a little part visible */
+        flex: unset;
+      }
+    }
+
+    /* ✅ Pehla aur Aakhri Glass Box ki Background Image Adjust Karna */
+    .glass-box:first-child::before {
+      background-position: -210px center; /* 100px left se shift */
+    }
+    .glass-box:last-child::before {
+      background-position: 2px center; /* 100px left se shift */
+    }
+
+    /* Second and Fourth Glass Box Background Image Adjustment */
+    .glass-box:nth-child(2)::before,
+    .glass-box:nth-child(4)::before {
+      background-size: 100% 100% ; /* Image ko box ke andar fully stretch kare */
+      background-position: center;
+      background-repeat: no-repeat;
+      
+    }
+
+    /* ==================== Navbar Styling ==================== */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 85%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      backdrop-filter: blur(10px);
+      padding: 15px 20px;
+      z-index: 1000;
+    
+
+    }
+    .navbar .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+    /* Container for menu links and button */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    /* Styling the nav links like buttons */
+    .nav-link {
+      padding: 8px 12px;
+      background-color: transparent;
+      border: 1px solid transparent;
+      border-radius: 5px;
+      color: white;
+      text-decoration: none;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: white;
+    }
+    .menu-toggle {
+      display: none;
+      cursor: pointer;
+      font-size: 24px;
+      color: white;
+    }
+
+    /* Responsive Navbar */
+    @media (max-width: 480px) {
+      .btn {
+        margin-right: 3px;
+      }
+      .menu {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background: rgba(255, 255, 255, 0.2);
+        width: 150px;
+        text-align: center;
+        border-radius: 10px;
+      }
+      .menu.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        margin-left: -100px;
+        color: transparent;
+      }
+      .navbar .btnu {
+        margin: 0px;
+        margin-left: 110px;
+      }
+      .navbar{
+        background: transparent;
+      }
+    }
+    .btnu {
+      background: linear-gradient(to left, #AE8625, #F7EF8A, #D2AC47, #EDC967);
+      min-width: 100px;   
+      cursor: pointer;
+      height: 30px;         
+      border-radius: 10px;
+      font-size: 12px;
+      border: 1px solid #F7EF8A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+    #ai {
+      background: linear-gradient(to left, #AE8625, #F7EF8A, #D2AC47, #EDC967);
+      color: black;
+      width: 37px;
+      height: 37px;
+      padding: 5px;
+      font-weight: 700;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* ==================== Slider Styling ==================== */
+    .slider-container {
+      width: 300px;
+      text-align: center;
+      position: absolute;
+      top: 560px;
+    }
+    .slider {
+      -webkit-appearance: none;
+      width: 60%;
+      height: 4px;
+      border-radius: 2px;
+      background: #dddddd00;
+      outline: none;
+      opacity: 0.9;
+      transition: opacity 0.15s ease-in-out;
+    }
+    .slider:hover {
+      opacity: 1;
+    }
+    .slider::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(to right, #F7EF8A var(--progress), #ddd var(--progress));
+      border-radius: 3px;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #000;
+      cursor: pointer;
+      position: relative;
+      margin-top: -7px;
+      border: 4px solid #F7EF8A;
+    }
+    .slider::-moz-range-progress {
+      background: #F7EF8A;
+      height: 4px;
+      border-radius: 3px;
+    }
+    .slider::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #4CAF50;
+      cursor: pointer;
+    }
+    .value {
+      margin-top: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    @media (min-width: 992px) {
+      .navbar .links {
+        justify-content: flex-end;
+        gap: 40px;
+      }
+    }
+    .line{
+        background-color: #dddddd34;
+        height: 1px;
+        width: 100%;
+        position: absolute;
+        top: 65px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <div style="width: 100px; height: 30px; display: flex; font-family: sans-serif; cursor: pointer;">
+        <div id="ai">AI</div>
+        <div>
+          <p style="text-transform: uppercase; font-size: 20px; margin-top: 1px; margin-left: 5px;">Health</p>
+          <br>
+          <p style="font-weight: 10; margin-top: -28px; font-size: 12.5px; margin-left: 5px;">A s s i s t a n t</p>
+        </div>
+      </div>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <!-- Nav Right Container -->
+    <div class="nav-right">
+      <div class="menu">
+        <a class="nav-link" href="#">Home</a>
+        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="#">Health Hub</a>
+        <a class="nav-link" href="#">State Indicators</a>
+      </div>
+      <button class="btnu">
+        Connect Garmin
+        <span style="font-size:15px; padding-left: 2px; margin-top: -3px;">🡕</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    function toggleMenu() {
+      document.querySelector('.menu').classList.toggle('show');
+    }
+  </script>
+<div class="line"></div>
+  <div class="container-fluid">
+    <div class="glass-box">
+      <p id="co" style="top: 0px;">
+        <button class="top">locked</button>
+      </p>
+    </div>  <!-- First Box (Remove in Tablet) -->
+    <div class="glass-box"> 
+      <button class="top-right-btn">Locked</button> 
+      <button class="top-right-btn">Locked</button> 
+      <img id="g" src="Vector (1).png" alt="">
+      <img id="t" src="jkl.png" alt=""> 
+      <p id="co">comming soon</p><!-- Button in Second Box -->
+    </div>  
+
+
+
+
+
+
+
+
+
+
+    <div class="glass-box">
+        
+        <div id="fir"
+        style="width: 100%; height: 65px; margin-left: 10px;">
+        <div style="display: flex;">
+    <img id="hu" src="hu.png" alt="" border="1px">
+<div>
+    <h2 class="he" style="margin-left: 3px;">Adam</h2>
+    <p class="pi" style="margin-left: 3px;">#1 .    12 days ago
+    </p>
+
+</div>
+<button class="active">active</button>
+
+    </div>
+    </div>
+
+
+
+
+    <div id="ir" style="width: 95%; height: 65px;  margin: 10px;">
+        <div style="display: flex; color: grey;" >
+  <div   style="width: 50%; margin: 10px;" ><p>Token CA</p> </div>
+  <div style="text-align: right; width: 50%; margin: 10px;" ><p >Token Value</p> </div>
+</div>
+<div style="display: flex; margin-top: -10px;" >
+    <div   style="width: 50%; margin: 10px; display: flex;" ><p>8bdhP1...MS7N</p><i  class="material-icons">content_copy</i> <i id="share"class="fa fa-arrow-up-right-from-square"></i> </div>
+    <div style="text-align: right; width: 50%; margin: 10px; color: green; display: flex;" ><p style="width: 100%;">72.0M</p>  </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<div id="r" style="width: 95%; height: 65px;  margin: 10px;">
+    <div style="display: flex; color: grey;" >
+<div   style="width: 50%; margin: 10px;" ><p>Wallet Address</p> </div>
+<div style="text-align: right; width: 50%; margin: 10px;" ><p >Balance</p> </div>
+</div>
+<div style="display: flex; margin-top: -10px;" >
+<div   style="width: 50%; margin: 10px; display: flex;" ><p>8bdhP1...MS7N</p><i  class="material-icons">content_copy</i> <i id="share"class="fa fa-arrow-up-right-from-square"></i> </div>
+<div style="text-align: right; width: 50%; margin: 10px; color: #EDC967; display: flex;" ><p style="width: 100%;">$7,397,020,99</p>  </div>
+</div>
+</div>
+
+<div style="width: 100%; display: flex;">
+    <button id="tv"><i style="font-size: 10px; margin-right: 5px;" class="fa fa-tv"></i>TEE running</button>
+    <button id="bread">Bread Completed</button>
+
+</div>
+
+<div style="width: 100%; display: flex; margin-top: 10px;">
+  <button id="gt">Efficient</button>
+  <button id="gt">Logical</button>
+  <button id="gt">precise</button>
+
+</div>
+
+
+<div class="status" style="display: flex; margin-top: 10px; color: #ddd; font-size: 14px">
+  <span style="width: 30%; margin-left: 15px;">Health Points</span>
+  <div style="text-align: right; width: 70%; margin-right: 20px;">100</div>
+</div>
+<div class="progress-bar" style="margin-top: 3px;">
+  <div class="progress-bar-fill" style="width: 100%; "></div>
+</div>
+<div class="status" style="display: flex; margin-top: 10px; color: #ddd; font-size: 14px;">
+  <span style="width: 40%; margin-left: 15px;">Bread pregress</span>
+  <div style="text-align: right; width: 60%; margin-left: 50px; display: flex;">Market cap 72.0M  <p style="color: orange; margin-left: 10px;">100%</p> </div>
+</div>
+<div class="progress-bar" style="margin-top: 3px; ">
+  <div class="progress-bar-fill" style="width: 100%; background-color: yellow;"></div>
+</div>
+
+
+
+
+
+
+
+
+    </div> 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <!-- Third Box (Remains the Same) -->
+    <div class="glass-box">
+      <button class="top-right-btn">Locked</button> 
+      <img id="g" src="Vector (1).png" alt=""> 
+      <img id="t" src="jkl.png" alt="">
+      <p id="co">comming soon</p>
+      <!-- Button in Fourth Box -->
+    </div>  
+    <div class="glass-box"></div>  <!-- Last Box (Remove in Tablet) -->
+  </div>
+
+  <div class="slider-container">
+    <input type="range" min="0" max="100" value="30" class="slider" id="myRange" style="--progress: 30%;">
+    <div style="display: none;" class="value" id="rangeValue">30</div>
+  </div>
+
+  <script>
+    const slider = document.getElementById("myRange");
+    const output = document.getElementById("rangeValue");
+    output.innerHTML = slider.value;
+
+    function updateSliderTrack() {
+      const percent = (slider.value - slider.min) / (slider.max - slider.min) * 100 + '%';
+      slider.style.setProperty('--progress', percent);
+    }
+
+    slider.oninput = function() {
+      output.innerHTML = this.value;
+      updateSliderTrack();
+    }
+
+    updateSliderTrack();
+  </script>
+
+  <!-- Code injected by live-server -->
+  <script>
+    // <![CDATA[  <-- For SVG support
+    if ('WebSocket' in window) {
+      (function () {
+        function refreshCSS() {
+          var sheets = [].slice.call(document.getElementsByTagName("link"));
+          var head = document.getElementsByTagName("head")[0];
+          for (var i = 0; i < sheets.length; ++i) {
+            var elem = sheets[i];
+            var parent = elem.parentElement || head;
+            parent.removeChild(elem);
+            var rel = elem.rel;
+            if (elem.href && (typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet")) {
+              var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+              elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+            }
+            parent.appendChild(elem);
+          }
+        }
+        var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+        var address = protocol + window.location.host + window.location.pathname + '/ws';
+        var socket = new WebSocket(address);
+        socket.onmessage = function (msg) {
+          if (msg.data == 'reload') window.location.reload();
+          else if (msg.data == 'refreshcss') refreshCSS();
+        };
+        if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+          console.log('Live reload enabled.');
+          sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+        }
+      })();
+    }
+    else {
+      console.error('Upgrade your browser. This Browser does NOT support WebSocket for Live-Reloading.');
+    }
+    // ]]>
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+<!-- Font Awesome CSS include karein -->
+
+
+
+</body>
+</html>
+<style>
+  #ir{
+    background: rgba(255, 255, 255, 0.016); /* Light Glass Effect */
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* Glass Effect */
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid #EDC967;
+      position: relative;
+      overflow: hidden;
+  }
+  #r{
+    background: rgba(255, 255, 255, 0.116); /* Light Glass Effect */
+      border-radius: 10px;
+      backdrop-filter: blur(10px); /* Glass Effect */
+      -webkit-backdrop-filter: blur(300px);
+      position: relative;
+      overflow: hidden;
+  }
+   .progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            width: 90%;
+            margin-left: 15px;
+        }
+        .progress-bar-fill {
+            height: 5px;
+            width: 100%;
+          }
+    #fir{
+        justify-content: space-between;
+        margin-top: 10px;
+        
+
+    }
+    #fir #hu{
+       width: 55px;
+       height: 55px;
+       border-radius: 10px;
+       border: 1px solid #F7EF8A;
+       margin: 5px;
+       cursor: pointer;
+    }
+.he{
+    font-size: 23px;
+    margin-top: 8px;
+    font-family: sans-serif;
+}
+.pi{
+    font-size: 10px;
+    margin-top: 5px;
+    font-family: sans-serif;
+}
+/* Add this CSS for positioning the 'active' button to the right side */
+.glass-box #fir button.active {
+  position: absolute;
+  top: 30px;
+  right: 20px; /* Push it to the right */
+  transform: translateY(-50%); /* Adjust for proper centering */
+  background: linear-gradient(to left, #AE8625, #F7EF8A, #D2AC47, #EDC967);
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border-radius: 15px;
+  width: 60px;
+  height: 23px;
+  font-size: 11px;
+  
+}
+
+.material-icons{
+    font-size: 13px;
+    margin-left: 13px;
+    margin-top: 3px;
+    cursor: pointer;
+}
+#share{
+    margin-left: 13px;
+     color: #D2AC47;
+     font-size: 12px;
+     margin-top: 3px;
+     cursor: pointer;
+}
+#tv{
+    color: red;
+    background-color: rgba(255, 0, 0, 0.244);
+    border: 1px solid red;
+    width: 110px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#bread{
+  color: rgba(255, 255, 0, 0.516);
+    background-color: rgba(255, 255, 0, 0.148);
+    border: 1px solid rgba(255, 255, 0, 0.502);
+    width: 110px;
+    height: 20px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 12px;
+}
+#gt{
+  background-color: #000;
+  width: 70px;
+  border: 1px solid rgba(255, 255, 255, 0.826);
+  color: rgba(255, 255, 255, 0.826);
+  margin-left: 10px;
+  height: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+</style>
